@@ -1,0 +1,242 @@
+{
+  "status": 1,
+  "content": "DAILY kkkk",
+  "subject": "TEST DAILY",
+  
+  "recurringEndDate": "2021-04-03T03:45:00",
+  "recurringStartDate": "2021-04-01T03:45:00",
+  "recurringTimeExecute": "2021-04-01T03:45:00",
+  "recurringType": "DAILY", 
+  
+  "chatRoom": [],
+  "chatRoomGroup": [],
+  "userGroup": [],
+  "users": [
+    {
+      "id": 2,
+      "name": "Dede ziah"
+    },
+    {
+      "id": 14,
+      "name": "Mbak Enik Asli"
+    }
+  ],
+  "messageFileBean": null,
+  "messageTypeBean": {
+    "code": "MT0003",
+    "description": "string",
+    "id": 3,
+    "name": "string"
+  }
+}
+
+================
+{
+  "status": 1,
+  "content": "hemmm",
+  "subject": "TEST recurring wekly",
+  
+  "recurringEndDate": "2021-04-30T03:45:00",
+  "recurringExecute": "THU",--------------------------> "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" value yg dikirim gini ya mam
+  "recurringStartDate": "2021-04-01T03:45:00",
+  "recurringTimeExecute": "2021-04-01T03:45:00",
+  "recurringType": "WEEKLY", 
+  
+  "chatRoom": [],
+  "chatRoomGroup": [],
+  "userGroup": [],
+  "users": [
+    {
+      "id": 2,
+      "name": "Dede ziah"
+    },
+    {
+      "id": 14,
+      "name": "Mbak Enik Asli"
+    }
+  ],
+  "messageFileBean": null,
+  "messageTypeBean": {
+    "code": "MT0003",
+    "description": "string",
+    "id": 3,
+    "name": "string"
+  }
+}
+=================================
+
+{
+  "status": 1,
+  "content": "TEST recurring monthly 76",
+  "subject": "TEST recurring monthly 76",
+  
+  "recurringEndDate": "2021-09-30T03:45:00",
+  "recurringExecute": "03",
+  "recurringStartDate": "2021-04-01T03:45:00",
+  "recurringTimeExecute": "2021-04-01T03:45:00",
+  "recurringType": "MONTHLY", 
+  
+  "chatRoom": [],
+  "chatRoomGroup": [],
+  "userGroup": [],
+  "users": [
+    {
+      "id": 2,
+      "name": "Dede ziah"
+    },
+    {
+      "id": 14,
+      "name": "Mbak Enik Asli"
+    }
+  ],
+  "messageFileBean": null,
+  "messageTypeBean": {
+    "code": "MT0003",
+    "description": "string",
+    "id": 3,
+    "name": "string"
+  }
+}
+
+==================================================
+
+{
+  "status": 1,
+  "content": "TEST recurring ANNUALLY",
+  "subject": "TEST recurring ANNUALLY",
+  
+  "recurringEndDate": "2025-09-30T03:45:00",
+  "recurringExecute": "17-04-2021",
+  "recurringStartDate": "2021-04-01T03:45:00",
+  "recurringTimeExecute": "2021-04-01T03:45:00",
+  "recurringType": "ANNUALLY", 
+  
+  
+  "chatRoom": [],
+  "chatRoomGroup": [],
+  "userGroup": [],
+  "users": [
+    {
+      "id": 2,
+      "name": "Dede ziah"
+    },
+    {
+      "id": 14,
+      "name": "Mbak Enik Asli"
+    }
+  ],
+  "messageFileBean": null,
+  "messageTypeBean": {
+    "code": "MT0003",
+    "description": "string",
+    "id": 3,
+    "name": "string"
+  }
+}
+
+==================================================
+
+{
+  "status": 1,
+  "content": "TEST recurring ATTRIBUTE",
+  "subject": "TEST recurring ATTRIBUTE",
+  
+  "recurringEndDate": "2025-09-30T03:45:00",
+  "recurringExecute": "9",
+  "recurringStartDate": "2021-06-01T03:45:00",
+  "recurringTimeExecute": "2021-06-01T03:45:00",
+  "recurringType": "ATTRIBUTE", 
+  
+  
+  "chatRoom": [],
+  "chatRoomGroup": [],
+  "userGroup": [],
+  "users": [
+    {
+      "id": 2,
+      "name": "Dede ziah"
+    }
+  ],
+  "messageFileBean": null,
+  "messageTypeBean": {
+    "code": "MT0003",
+    "description": "string",
+    "id": 3,
+    "name": "string"
+  }
+}
+
+
+======================
+{
+  "status": 1,
+  "content": "test once off, user and user group ",
+  "subject": "once-off message",
+  "onceOffDate": "2021-04-01T08:20:00",
+  "onceOffTime": "2021-04-01T08:20:00",
+  "chatRoom": [],
+  "chatRoomGroup": [],
+  "userGroup": [
+     {
+      "id": 12,
+      "name": "test test test"
+    }
+  ],
+  "users": [
+    {
+      "id": 2,
+      "name": "Dede ziah"
+    },
+	{
+      "id": 14,
+      "name": "Mbak Enik Asli"
+    }
+  ],
+  "messageFileBean": null,
+  "messageTypeBean": {
+  
+    "code": "MT0002",
+    "description": "string",
+    "id": 2,
+    "name": "string"
+  }
+  
+}
+
+==============================
+{
+  "status": 1,
+  "content": "test immedieate message, user and user group ",
+  "subject": "immedieate message",
+  "chatRoom": [],
+  "chatRoomGroup": [],
+  "userGroup": [
+     {
+      "id": 12,
+      "name": "test test test"
+    }
+  ],
+  "users": [
+    {
+      "id": 2,
+      "name": "Dede ziah"
+    },
+	{
+      "id": 14,
+      "name": "Mbak Enik Asli"
+    }
+  ],
+  "messageFileBean": {
+    "fileId": "message_image/257b1740-67e6-4bdb-ad8e-92e168b14335.png",
+    "fileUrl": "string",
+    "id": 5
+  },
+  "messageTypeBean": {
+  
+    "code": "MT0001",
+    "description": "string",
+    "id": 1,
+    "name": "string"
+  }
+  
+}

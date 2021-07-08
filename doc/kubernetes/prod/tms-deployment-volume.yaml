@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: indomarco-tms
+  name: tms-engine-deployment
+  labels:
+    name: tms-engine-deployment
+spec:
+  selector:
+    matchLabels:
+      app: tms-apps
+  template:
+    metadata:
+      labels:
+        app: tms-apps
+    spec:
+      containers:
+        - name: indomarco-tms-engine
+          image: 369693/indomarco-tms:prod-1.0.1
+          volumeMounts:
+            - mountPath: /opt/telegram
+              name: telegram-data
+          resources:
+            limits:
+              memory: "1000Mi"
+              cpu: "1500m"
+          ports:
+            - containerPort: 8183
+      volumes:
+        - name: telegram-data
+          nfs:
+            server: 172.18.182.87
+            path: /srv/nfs/storage/

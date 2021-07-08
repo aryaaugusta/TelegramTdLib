@@ -1,0 +1,72 @@
+image: adoptopenjdk/openjdk11:alpine-jre
+
+options:
+  size: 2x
+definitions:
+  services:
+    docker:
+      memory: 7128
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Maven Build
+          image: maven:3.6.3-jdk-11-slim
+          caches:
+            - maven
+          script:
+            - mvn -B -P staging clean package  -Dmaven.test.skip=true
+          artifacts:
+            - target/*.jar
+      - step:
+          name: Build Image and Push
+          caches:
+            - docker
+          services:
+            - docker
+          script:
+            - export IMAGE_NAME=$DOCKER_HUB_REPO_TEST:$BITBUCKET_COMMIT
+            - docker build -t $IMAGE_NAME .
+            - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+            - docker push $IMAGE_NAME
+    staging:
+      - step:
+          name: Maven Build
+          image: maven:3.6.3-jdk-11-slim
+          caches:
+            - maven
+          script:
+            - mvn -B -P staging clean package  -Dmaven.test.skip=true
+          artifacts:
+            - target/*.jar
+      - step:
+          caches:
+            - docker
+          services:
+            - docker
+          script:
+            - export IMAGE_NAME=$DOCKER_HUB_REPO_STAGING:$BITBUCKET_COMMIT
+            - docker build -t $IMAGE_NAME .
+            - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+            - docker push $IMAGE_NAME
+    production:
+      - step:
+          name: Maven Build
+          image: maven:3.6.3-jdk-11-slim
+          caches:
+            - maven
+          script:
+            - mvn -B -P production clean package  -Dmaven.test.skip=true
+          artifacts:
+            - target/*.jar
+      - step:
+          caches:
+            - docker
+          services:
+            - docker
+          script:
+            - export IMAGE_NAME=$DOCKER_HUB_REPO:$BITBUCKET_COMMIT
+            - docker build -t $IMAGE_NAME .
+            - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+            - docker push $IMAGE_NAME

@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: indomarco-tms
+  name:  indomarcotms-service
+spec:
+  selector:
+    app:  tms-apps
+  type:  LoadBalancer
+  ports:
+    - port:  8183
+      targetPort:  8183
+      nodePort: 31023

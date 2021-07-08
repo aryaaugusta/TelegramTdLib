@@ -1,0 +1,53 @@
+image: atlassian/pipelines-awscli
+
+pipelines:
+  branches:
+     production:
+      - step:
+          caches:
+            - docker
+          services:
+            - docker
+          script:
+            - export IMAGE_NAME=$AWS_ECR_REPOSITORY_PROD:$BITBUCKET_COMMIT
+            - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID_PROD}" --profile prod
+            - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY_PROD}" --profile prod
+            - eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION --profile prod | sed 's;https://;;g')
+            - docker build -t $IMAGE_NAME .
+            - docker push $IMAGE_NAME
+      - step:
+          script:
+            - export IMAGE_NAME=$AWS_ECR_REPOSITORY_PROD:$BITBUCKET_COMMIT
+            - echo ${IMAGE_NAME}
+            - pipe: atlassian/aws-eks-kubectl-run:1.2.0
+              variables:
+                AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID_PROD}
+                AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY_PROD}
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                CLUSTER_NAME: $EKS_CLUSTER_NAME
+                IMAGE_NAME: $AWS_ECR_REPOSITORY_PROD:$BITBUCKET_COMMIT
+                KUBECTL_COMMAND: '-n $K8S_NAMESPACE set image deployment/$K8S_SERVICE_NAME $K8S_SERVICE_NAME=$IMAGE_NAME --record'
+     master:
+      - step:
+          caches:
+          - docker
+          services:
+            - docker
+          script:
+            - export IMAGE_NAME=$AWS_ECR_REPOSITORY:$BITBUCKET_COMMIT
+            - aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+            - aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+            - eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION | sed 's;https://;;g')
+            - docker build -t $IMAGE_NAME .
+            - docker push $IMAGE_NAME
+     staging:
+       - step:
+           caches:
+           - docker
+           services:
+             - docker
+           script:
+             - export IMAGE_NAME=$DOCKER_HUB_REPO:$BITBUCKET_COMMIT
+             - docker build -t $IMAGE_NAME .
+             - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+             - docker push $IMAGE_NAME
